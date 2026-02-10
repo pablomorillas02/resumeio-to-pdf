@@ -21,7 +21,7 @@ the payload.
 
 Clone the repository
 ```bash
-git clone https://github.com/felipeall/resumeio-to-pdf.git
+git clone https://github.com/pablomorillas02/resumeio-to-pdf.git
 ```
     
 Go to the project's root folder
