@@ -154,20 +154,20 @@
         <input type="text" class="resume" name="rendering_token" placeholder="{{ i18n(lang, 'placeholder') }}" aria-label="Id" maxlength="24">
         <span class="error">{{ i18n(lang, 'error') }}</span>
         <select class="resume" name="language" id="language" aria-label="Language">
-            <option value="spa" selected>Español</option>
-            <option value="eng">English</option>
-            <option value="fra">Français</option>
-            <option value="deu">Deutsch</option>
-            <option value="ita">Italiano</option>
-            <option value="por">Português</option>
-            <option value="nld">Nederlands</option>
-            <option value="pol">Polski</option>
-            <option value="rus">Русский</option>
-            <option value="ara">العربية</option>
-            <option value="chi_sim">简体中文</option>
-            <option value="chi_tra">繁體中文</option>
-            <option value="jpn">日本語</option>
-            <option value="kor">한국어</option>
+            <option value="spa" {% if lang == 'spa' %}selected{% endif %}>Español</option>
+            <option value="eng" {% if lang == 'eng' %}selected{% endif %}>English</option>
+            <option value="fra" {% if lang == 'fra' %}selected{% endif %}>Français</option>
+            <option value="deu" {% if lang == 'deu' %}selected{% endif %}>Deutsch</option>
+            <option value="ita" {% if lang == 'ita' %}selected{% endif %}>Italiano</option>
+            <option value="por" {% if lang == 'por' %}selected{% endif %}>Português</option>
+            <option value="nld" {% if lang == 'nld' %}selected{% endif %}>Nederlands</option>
+            <option value="pol" {% if lang == 'pol' %}selected{% endif %}>Polski</option>
+            <option value="rus" {% if lang == 'rus' %}selected{% endif %}>Русский</option>
+            <option value="ara" {% if lang == 'ara' %}selected{% endif %}>العربية</option>
+            <option value="chi_sim" {% if lang == 'chi_sim' %}selected{% endif %}>简体中文</option>
+            <option value="chi_tra" {% if lang == 'chi_tra' %}selected{% endif %}>繁體中文</option>
+            <option value="jpn" {% if lang == 'jpn' %}selected{% endif %}>日本語</option>
+            <option value="kor" {% if lang == 'kor' %}selected{% endif %}>한국어</option>
         </select>
         <button id="submit-btn" class="btn" type="submit"><span id="submit-text">{{ i18n(lang, 'download') }}</span>
             <svg id="loader" width="23" height="23" stroke="#fff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -184,6 +184,10 @@
     window.addEventListener('pageshow', function() {
         document.getElementById('loader').style.display = 'none';
         document.getElementById('submit-text').style.display = 'block';
+    });
+
+    document.getElementById('language').addEventListener('change', function() {
+        window.location.href = '/?lang=' + this.value;
     });
 
     const downloadForm = document.getElementById("downloadForm");
