@@ -1,9 +1,22 @@
 FROM python:3.12.11-slim-trixie
 
-# Update, install tesseract, clean up
+# Update, install tesseract with language packs, clean up
 RUN apt-get update  \
     && apt-get install -y --no-install-recommends \
     tesseract-ocr \
+    tesseract-ocr-spa \
+    tesseract-ocr-fra \
+    tesseract-ocr-deu \
+    tesseract-ocr-ita \
+    tesseract-ocr-por \
+    tesseract-ocr-nld \
+    tesseract-ocr-pol \
+    tesseract-ocr-rus \
+    tesseract-ocr-ara \
+    tesseract-ocr-chi-sim \
+    tesseract-ocr-chi-tra \
+    tesseract-ocr-jpn \
+    tesseract-ocr-kor \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
 
