@@ -16,8 +16,7 @@ ENV PYTHONUNBUFFERED=1 \
 # Install dependencies
 WORKDIR /app
 COPY pyproject.toml uv.lock ./
-RUN --mount=from=ghcr.io/astral-sh/uv,source=/uv,target=/bin/uv \
-    uv pip install .
+RUN pip install uv && uv pip install .
 
 # Copy app files
 COPY . ./
