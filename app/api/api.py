@@ -4,11 +4,13 @@ from fastapi import APIRouter, Path, Query, Request, Response
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 
+from app.i18n import i18n
 from app.schemas.resumeio import Extension, Language
 from app.services.resumeio import ResumeioDownloader
 
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
+templates.env.globals["i18n"] = i18n
 
 
 @router.post("/download/{rendering_token}")
@@ -50,7 +52,7 @@ def download_resume(
 
 
 @router.get("/", response_class=HTMLResponse, include_in_schema=False)
-def index(request: Request):
+def index(request: Request, lang: str = "spa"):
     """
     Render the main index page.
 
@@ -58,10 +60,12 @@ def index(request: Request):
     ----------
     request : fastapi.Request
         The request instance.
+    lang : str, optional
+        Language code for the UI, by default "spa".
 
     Returns
     -------
     fastapi.templating.Jinja2Templates.TemplateResponse
         Rendered template of the main index page.
     """
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse("index.html", {"request": request, "lang": lang})

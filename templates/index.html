@@ -149,10 +149,10 @@
 </head>
 <body>
 <div class="container">
-    <h1 class="title">Resume.io to PDF</h1>
+    <h1 class="title">{{ i18n(lang, 'title') }}</h1>
     <form method="post" class="resume_form" id="downloadForm">
-        <input type="text" class="resume" name="rendering_token" placeholder="Enter your resume `renderingToken`" aria-label="Id" maxlength="24">
-        <span class="error">Your resume `renderingToken` must be a 24-character alphanumeric string</span>
+        <input type="text" class="resume" name="rendering_token" placeholder="{{ i18n(lang, 'placeholder') }}" aria-label="Id" maxlength="24">
+        <span class="error">{{ i18n(lang, 'error') }}</span>
         <select class="resume" name="language" id="language" aria-label="Language">
             <option value="spa" selected>Español</option>
             <option value="eng">English</option>
@@ -169,7 +169,7 @@
             <option value="jpn">日本語</option>
             <option value="kor">한국어</option>
         </select>
-        <button id="submit-btn" class="btn" type="submit"><span id="submit-text">Download</span>
+        <button id="submit-btn" class="btn" type="submit"><span id="submit-text">{{ i18n(lang, 'download') }}</span>
             <svg id="loader" width="23" height="23" stroke="#fff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <g class="spinner_V8m1">
                     <circle cx="12" cy="12" r="9.5" fill="none" stroke-width="3"></circle>
