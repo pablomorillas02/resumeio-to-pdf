@@ -10,7 +10,7 @@ from PIL import Image
 from pypdf import PdfReader, PdfWriter
 from pypdf.annotations import Link
 
-from app.schemas.resumeio import Extension
+from app.schemas.resumeio import Extension, Language
 
 
 @dataclass
@@ -26,11 +26,14 @@ class ResumeioDownloader:
         Image extension to download, by default "jpeg".
     image_size : int, optional
         Size of the images to download, by default 3000.
+    language : Language, optional
+        Language for OCR text recognition, by default "spa" (Spanish).
     """
 
     rendering_token: str
     extension: Extension = Extension.jpeg
     image_size: int = 3000
+    language: Language = Language.spa
     METADATA_URL: str = "https://ssr.resume.tools/meta/{rendering_token}?cache={cache_date}"
     IMAGES_URL: str = (
         "https://ssr.resume.tools/to-image/{rendering_token}-{page_id}.{extension}?cache={cache_date}&size={image_size}"
@@ -55,7 +58,12 @@ class ResumeioDownloader:
         metadata_w, metadata_h = self.metadata[0].get("viewport").values()
 
         for i, image in enumerate(images):
-            page_pdf = pytesseract.image_to_pdf_or_hocr(Image.open(image), extension="pdf", config="--dpi 300")
+            page_pdf = pytesseract.image_to_pdf_or_hocr(
+                Image.open(image),
+                lang=self.language.value,
+                extension="pdf",
+                config="--dpi 300",
+            )
             page = PdfReader(io.BytesIO(page_pdf)).pages[0]
             page_scale = max(page.mediabox.height / metadata_h, page.mediabox.width / metadata_w)
             pdf.add_page(page)

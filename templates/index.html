@@ -23,15 +23,6 @@
             gap: 3rem;
         }
 
-        .links {
-            position: absolute;
-            top: 0;
-            right: 0;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
         .title {
             font-size: 3rem;
         }
@@ -51,6 +42,27 @@
             border: 1px solid #666666;
             font-family: "Inter", sans-serif;
             font-size: 1rem;
+            background-color: #ffffff;
+            box-sizing: border-box;
+        }
+
+        select.resume {
+            appearance: none;
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
+        }
+
+        select.resume:focus {
+            outline: none;
+            border-color: #1c1c1c;
+        }
+
+        input.resume:focus {
+            outline: none;
+            border-color: #1c1c1c;
         }
 
         .btn {
@@ -137,14 +149,26 @@
 </head>
 <body>
 <div class="container">
-    <div class="links">
-        <iframe  src="https://ghbtns.com/github-btn.html?user=felipeall&repo=resumeio-to-pdf&type=star&count=true&size=large" frameborder="0" scrolling="0" width="130" height="30" title="GitHub"></iframe>
-        <a href="https://www.buymeacoffee.com/felipeall" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 40px !important;width: 160px !important;" ></a>
-    </div>
     <h1 class="title">Resume.io to PDF</h1>
     <form method="post" class="resume_form" id="downloadForm">
         <input type="text" class="resume" name="rendering_token" placeholder="Enter your resume `renderingToken`" aria-label="Id" maxlength="24">
         <span class="error">Your resume `renderingToken` must be a 24-character alphanumeric string</span>
+        <select class="resume" name="language" id="language" aria-label="Language">
+            <option value="spa" selected>Español</option>
+            <option value="eng">English</option>
+            <option value="fra">Français</option>
+            <option value="deu">Deutsch</option>
+            <option value="ita">Italiano</option>
+            <option value="por">Português</option>
+            <option value="nld">Nederlands</option>
+            <option value="pol">Polski</option>
+            <option value="rus">Русский</option>
+            <option value="ara">العربية</option>
+            <option value="chi_sim">简体中文</option>
+            <option value="chi_tra">繁體中文</option>
+            <option value="jpn">日本語</option>
+            <option value="kor">한국어</option>
+        </select>
         <button id="submit-btn" class="btn" type="submit"><span id="submit-text">Download</span>
             <svg id="loader" width="23" height="23" stroke="#fff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <g class="spinner_V8m1">
@@ -186,7 +210,8 @@
             inputField.classList.remove('error-border', 'shake');
         }
 
-        downloadForm.action = '/download/' + rendering_token;
+        const language = document.getElementById('language').value;
+        downloadForm.action = '/download/' + rendering_token + '?language=' + language;
         document.getElementById('submit-text').style.display = 'none';
         document.getElementById('loader').style.display = 'block';
         this.submit();
