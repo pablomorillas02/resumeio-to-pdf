@@ -2,7 +2,7 @@
 
 Download your resume from [resume.io](https://resume.io) as a PDF file. 
 
-<div align="center"><a href="https://resumeio-to-pdf.fly.dev/"><img src="https://github.com/felipeall/resumeio-to-pdf/assets/20917430/b7edfda4-4768-4659-af68-561e1effe628" width="700" /></a></div>
+<div align="center"><img width="1430" height="636" alt="image" src="https://github.com/user-attachments/assets/941b9485-62f6-4e77-b9f2-722d644e4926" width="700" /></a></div>
 
 Open the application, enter your resume `renderingToken` and click the download button. 
 It will automatically download your resume as image files, merge them, inject the hyperlinks,
